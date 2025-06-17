@@ -82,7 +82,7 @@ def run_queries(conn):
         print("\nг) и барабанная дробь... самый популярный транспорт:", cur.fetchone())
 
         transport_id = 1
-        cur.execute(f"SELECT seat_number FROM bookings WHERE transport_id = {transport_id};")
+        cur.execute("SELECT seat_number FROM bookings WHERE transport_id = %s", (transport_id,))
         booked_seats = {row[0] for row in cur.fetchall()}
         all_seats = set(range(1, 41))
         free_seats = sorted(list(all_seats - booked_seats))

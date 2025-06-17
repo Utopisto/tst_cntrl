@@ -1,0 +1,7 @@
+ id | type  | model_or_route | capacity 
+----+-------+----------------+----------
+  1 | bus   | Маршрут 101    |       40
+  2 | train | Поезд "Стриж"  |      200
+  3 | plane | Boeing 737     |      150
+(3 rows)
+

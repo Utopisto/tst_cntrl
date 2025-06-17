@@ -44,21 +44,18 @@ def init_db(conn):
         passengers_to_add = [
             ('Иван Петров', 'AA123456'), ('Мария Сидорова', 'BB789012'), ('Алексей Иванов', 'CC345678')
         ]
-        for p in passengers_to_add:
-            cur.execute("INSERT INTO passengers (name, passport_number) VALUES (%s, %s)", p)
+        cur.executemany("INSERT INTO passengers (name, passport_number) VALUES (%s, %s)", passengers_to_add)
 
         transport_to_add = [
             ('bus', 'Маршрут 101', 40), ('train', 'Поезд "Стриж"', 200), ('plane', 'Boeing 737', 150)
         ]
-        for t in transport_to_add:
-            cur.execute("INSERT INTO transport (type, model_or_route, capacity) VALUES (%s, %s, %s)", t)
+        cur.executemany("INSERT INTO transport (type, model_or_route, capacity) VALUES (%s, %s, %s)", transport_to_add)
 
         bookings_to_add = [
             (1, 1, 10, '2025-05-15'), (1, 2, 55, '2025-06-20'), (1, 3, 1, '2025-07-01'),
             (2, 1, 12, '2025-05-18'), (2, 2, 60, '2025-05-25'), (3, 3, 18, '2024-12-10')
         ]
-        for b in bookings_to_add:
-            cur.execute("INSERT INTO bookings (passenger_id, transport_id, seat_number, booking_date) VALUES (%s, %s, %s, %s)", b)
+        cur.executemany("INSERT INTO bookings (passenger_id, transport_id, seat_number, booking_date) VALUES (%s, %s, %s, %s)", bookings_to_add)
 
         print("все на месте! данные успешно загружены.")
         conn.commit()
